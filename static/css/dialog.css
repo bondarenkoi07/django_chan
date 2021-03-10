@@ -1,0 +1,36 @@
+div.message{
+    width:29vw;
+    background-color: #ebd8fd;
+    vertical-align: top;
+    margin-bottom: 3px;
+}
+
+div.message div.settings{
+    background-color: #a38ecb;
+    padding: 4px;
+    color: floralwhite;
+}
+
+div.message > p.text{
+    width: inherit;
+    margin:  0 10px  5px 10px;
+}
+
+div.settings > button{
+    background-color: #e3d9d4;
+    display: inline;
+}
+
+p.error {
+    background-color: #d7d5d5;
+    font-size: 10pt;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-style: italic;
+}
+
+img,video{
+    margin-left: 3px;
+}
+body{
+    background-color: #e0e0e3;
+}
