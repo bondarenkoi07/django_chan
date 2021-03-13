@@ -16,7 +16,7 @@ class Thread(models.Model):
     name = models.CharField(max_length=128)
     text = models.CharField(max_length=1024)
     media = models.FileField(upload_to="", default='')
-    date = models.DateTimeField(default=timezone.now())
+    date = models.DateTimeField(default=timezone.now)
     media_type = models.TextField(max_length="24", default='')
     unit = models.ForeignKey(Unit, models.CASCADE, default='')
     priority = models.SmallIntegerField(null=True)
@@ -29,8 +29,13 @@ class Comment(models.Model):
     text = models.CharField(max_length=1024)
     thread = models.ForeignKey(Thread, models.CASCADE, default=0)
     media = models.FileField(upload_to="", default='')
-    date = models.DateTimeField(default=timezone.now())
-    media_type = models.TextField(max_length="24", default='')
+    date = models.DateTimeField(default=timezone.now)
+    media_type = models.TextField(max_length=24, default='')
+
+
+class ExchangeWord(models.Model):
+    pattern = models.CharField(max_length=256, null=True, default=0)
+    replacer = models.CharField(max_length=256, null=True, default=0)
 
 
 @receiver(models.signals.post_delete, sender=Comment)
@@ -64,7 +69,6 @@ def insert_thread_priority(sender, instance, **kwargs):
 
 @receiver(models.signals.pre_save, sender=Comment)
 def update_thread_priority(sender, instance, **kwargs):
-
     _thread = instance.thread
 
     if _thread:

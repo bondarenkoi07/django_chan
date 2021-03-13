@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='comment',
-            name='thread_id',
+            name='thread',
             field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='hello_world.thread'),
         ),
     ]
