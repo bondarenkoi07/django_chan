@@ -1,5 +1,3 @@
-import re
-
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, HttpResponseNotModified
 from django.shortcuts import render
@@ -18,7 +16,7 @@ def unit(request, _unit):
     threads = Thread.objects.filter(unit=unit_obj.id).order_by("priority")
     thread_form = ThreadForm
     units = Unit.objects.all().order_by("name")
-    data = {"threads": threads, "form": thread_form,'units': units}
+    data = {"threads": threads, "form": thread_form, 'units': units}
     return render(request, "unit_template.html", context=data)
 
 
@@ -52,7 +50,6 @@ def createComment(request, _unit, _thread):
                 comments_id = request.session["comments"]
                 comments_id.append(comment.id)
                 request.session["comments"] = comments_id
-                print(request.session["comments"])
     return HttpResponseRedirect(f"/{_unit}/{_thread}")
 
 
@@ -63,7 +60,7 @@ def deleteComment(request, _unit, _thread):
     return HttpResponseRedirect(f"/{_unit}/{_thread}")
 
 
-def updateComment(request,_thread, _unit, id):
+def updateComment(request, _thread, _unit, id):
     if request.method == "POST":
         comment = request.POST.get("text")
         Comment.objects.filter(id=id).update(text=comment)

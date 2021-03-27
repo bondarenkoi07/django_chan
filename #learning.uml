@@ -3,22 +3,23 @@
   <ID>DjangoModelDependency</ID>
   <OriginalElement>#learning</OriginalElement>
   <nodes>
+    <node x="0.0" y="235.0">hello_world.models.ExchangeWord</node>
     <node x="12.0" y="0.0">hello_world.models.Unit</node>
     <node x="4.0" y="80.0">hello_world.models.Thread</node>
-    <node x="0.0" y="160.0">hello_world.models.Comment</node>
+    <node x="155.0" y="133.0">hello_world.models.Comment</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="hello_world.models.Thread" target="hello_world.models.Unit">
-      <point x="0.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
     <edge source="hello_world.models.Comment" target="hello_world.models.Thread">
       <point x="0.0" y="-15.0" />
       <point x="0.0" y="15.0" />
     </edge>
+    <edge source="hello_world.models.Thread" target="hello_world.models.Unit">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="119.0" y="95.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="362.5" y="111.0" />
   <SelectedNodes>
     <node>hello_world.models.Comment</node>
   </SelectedNodes>

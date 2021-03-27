@@ -1,6 +1,6 @@
 import os
+import re
 
-from django.core.exceptions import MultipleObjectsReturned
 from django.db import models
 from django.dispatch import receiver
 from django.utils import timezone
@@ -69,13 +69,18 @@ def insert_thread_priority(sender, instance, **kwargs):
 
 @receiver(models.signals.pre_save, sender=Comment)
 def update_thread_priority(sender, instance, **kwargs):
+    replacers = ExchangeWord.objects.all()
+    for replacer in replacers.iterator():
+        pattern = re.compile(replacer.pattern)
+        instance.text = re.sub(pattern, " " + replacer.replacer + " ", instance.text)
+
     _thread = instance.thread
 
     if _thread:
         if _thread.priority > 1:
             try:
-                Thread_list = list(Thread.objects.filter(unit=_thread.unit))
-                prev_thread = next(item for item in Thread_list if item.priority == _thread.priority - 1)
+                thread_list = list(Thread.objects.filter(unit=_thread.unit))
+                prev_thread = next(item for item in thread_list if item.priority == _thread.priority - 1)
                 prev_thread.priority = _thread.priority
                 _thread.priority = _thread.priority - 1
                 prev_thread.save()
