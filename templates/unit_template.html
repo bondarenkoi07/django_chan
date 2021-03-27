@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>1488chan</title>
-    <link rel="shortcut icon" href="{% static 'favicon.png' %}"/>
-    <style>
-        header li{
-            display: inline;
-        }
-    </style>
-</head>
-<body>
-<header>
-        {% for unit in units %}
-            <li><a href="/{{ unit.name }}">{{ unit.name }}</a></li>
-    {% endfor %}
-</header>
+{% extends "base.html" %}
+
+{% block title%}
+    {{ thread_info.unit }}
+{% endblock %}
+
+{% block main-content %}
     {% for thread in threads %}
         <li><a href="{{ request.path }}/{{ thread.id }}">{{ thread.name }}</a></li>
     {% endfor %}
@@ -25,5 +13,5 @@
         {{ form }}
         <input type="submit" value="Создать тред">
     </form>
-</body>
-</html>
+{% endblock %}
+
