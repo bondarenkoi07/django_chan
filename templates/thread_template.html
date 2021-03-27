@@ -1,44 +1,41 @@
-<!DOCTYPE html>
-{% load static%}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ thread_info.data.name }}</title>
-    <link rel="stylesheet" type="text/css" href="{% static "css/dialog.css" %}">
-    <link rel="shortcut icon" href="{% static 'favicon.png' %}"/>
-    <style>
-        header li{
-            display: inline;
-        }
-    </style>
-</head>
-<body>
-<header>
-    {% for unit in units %}
-        <li><a href="/{{ unit.name }}">{{ unit.name }}</a></li>
-    {% endfor %}
-</header>
-<a href="{% url 'index' %}">На главную </a>
-<script defer src="{% static "js/main.js" %}">
 
-</script>
-    <p>{{ thread_info.data.text }}</p>
+{% extends "base.html" %}
+
+{% load static %}
+
+ {% block title%}
+     {{ thread_info.data.name }}
+ {% endblock %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/dialog.css" %}">
+{% endblock %}
+
+
+
+
+{% block main-content %}
+    <a href="{% url 'index' %}">На главную </a>
+    <script src="{% static "js/main.js" %}" defer>
+
+    </script>
+     <p>{{ thread_info.data.text }}</p>
     {% if thread_info.data.media.url != '' %}
         {% if thread_info.data.media_type == 'image'  %}
              <img src="{{ thread_info.data.media.url }}" alt="pic" width="100px" height="100px"/>
         {% elif thread_info.data.media_type == 'video' %}
             <video src="{{ thread_info.data.media.url }}" width="100px" height="100px" controls></video>
         {% else %}
-            <p class="error">Анон залил какой-то кал вместо пик или шебм</p>
+            <p >Анон залил какой-то кал вместо пик или шебм</p>
         {% endif %}
     {% endif %}
     <div id="text_table">
-        <form action="/{{ thread_info.unit }}/{{ thread_info.data.id }}/delete/" id="delete">
+        <form action="/{{ thread_info.unit }}/{{ thread_info.data.id }}/delete/" id="delete" >
             <input type="hidden" name="id" value="1">
         </form>
             {% for post in thread %}
-                <div class="message" id="m{{ post.id }}">
-                    <div class="settings">id:{{ post.id }}
+                <div id="m{{ post.id }}">
+                    <div >id:{{ post.id }}
                         {{ post.date|date:"G:i:s n/j/Y D" }}
                         {% if post.id in request.session.comments %}
                             <button onclick="deleteComment({{ post.id }})">Удалить</button>
@@ -54,7 +51,7 @@
                             <p class="error">Анон залил какой-то кал вместо пик или шебм</p>
                         {% endif %}
                     {% endif %}
-                   <p id="p{{ post.id }}" class="text">{{post.text}}</p>
+                   <p id="p{{ post.id }}">{{post.text}}</p>
                 </div>
             {% endfor %}
     </div>
@@ -67,5 +64,9 @@
     <div id="csrf_token">
         {% csrf_token %}
     </div>
-</body>
-</html>
+
+{% endblock %}
+
+
+
+

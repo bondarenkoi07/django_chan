@@ -8,7 +8,7 @@ from hello_world.models import *
 
 def unit_list(request):
     units = Unit.objects.all().order_by("name")
-    return render(request, "units_list.html", context={"units": units})
+    return render(request, "base.html", context={"units": units})
 
 
 def unit(request, _unit):

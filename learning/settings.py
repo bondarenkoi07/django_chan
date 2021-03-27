@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'hello_world'
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

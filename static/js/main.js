@@ -24,8 +24,9 @@ function updateComment(messageId){
 
             let input_submit = document.createElement("input");
 
+          //  input_submit.classList.add("btn btn btn-outline-dark btn-sm");
             input_submit.type="submit";
-            input_submit.value="Принять"
+            input_submit.value="Принять";
 
             par.remove();
 
