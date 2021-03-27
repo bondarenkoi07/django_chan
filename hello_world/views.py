@@ -6,7 +6,7 @@ from hello_world.form import CommentForm, ThreadForm
 from hello_world.models import *
 
 
-def unit_list(request):
+def index(request):
     units = Unit.objects.all().order_by("name")
     return render(request, "base.html", context={"units": units})
 

@@ -19,8 +19,8 @@
     <script src="{% static "js/main.js" %}" defer>
 
     </script>
-     <p>{{ thread_info.data.text }}</p>
-    {% if thread_info.data.media.url != '' %}
+    <div class="p-2">
+        {% if thread_info.data.media.url != '' %}
         {% if thread_info.data.media_type == 'image'  %}
              <img src="{{ thread_info.data.media.url }}" alt="pic" width="100px" height="100px"/>
         {% elif thread_info.data.media_type == 'video' %}
@@ -29,8 +29,11 @@
             <p >Анон залил какой-то кал вместо пик или шебм</p>
         {% endif %}
     {% endif %}
+    <p>{{ thread_info.data.text }}</p>
+    </div>
+
     <div id="text_table">
-        <form action="/{{ thread_info.unit }}/{{ thread_info.data.id }}/delete/" id="delete" >
+        <form action="/{{ thread_info.unit }}/{{ thread_info.data.id }}/delete/" id="delete">
             <input type="hidden" name="id" value="1">
         </form>
             {% for post in thread %}
@@ -38,8 +41,8 @@
                     <div >id:{{ post.id }}
                         {{ post.date|date:"G:i:s n/j/Y D" }}
                         {% if post.id in request.session.comments %}
-                            <button onclick="deleteComment({{ post.id }})">Удалить</button>
-                            <button onclick="updateComment({{ post.id }})">Редактировать</button>
+                            <button onclick="deleteComment({{ post.id }})" class="btn btn-outline-dark btn-sm">Удалить</button>
+                            <button onclick="updateComment({{ post.id }})" class="btn btn-outline-dark btn-sm">Редактировать</button>
                         {% endif %}
                     </div>
                     {% if post.media.url != '' %}

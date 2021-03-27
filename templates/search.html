@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main-content %}
+    {% if data != None %}
+        {% for thread_info in data %}
+            <h2><a href="/{{ thread_info.unit }}/{{  thread_info.thread.id }}">{{ thread_info.thread.name }}</a></h2>
+            <div class="p-2 border-top">
+                {% if thread_info.thread.media.url != '' %}
+                {% if thread_info.thread.media_type == 'image'  %}
+                     <img src="{{ thread_info.thread.media.url }}" alt="pic" width="100px" height="100px"/>
+                {% elif thread_info.thread.media_type == 'video' %}
+                    <video src="{{ thread_info.thread.media.url }}" width="100px" height="100px" controls></video>
+                {% else %}
+                    <p >Анон залил какой-то кал вместо пик или шебм</p>
+                {% endif %}
+            {% endif %}
+            <p class="border-bottom">{{ thread_info.thread.text }}</p>
+            </div>
+            {% for post in thread_info.comments %}
+                    <div id="m{{ post.id }}">
+                        <div >id:{{ post.id }}
+                            {{ post.date|date:"G:i:s n/j/Y D" }}
+                        </div>
+                        {% if post.media.url != '' %}
+                            {% if post.media_type == 'image'  %}
+                                <img src="{{ post.media.url }}" alt="pic" width="100px" height="100px"/>
+                            {% elif post.media_type == 'video' %}
+                                <video src="{{ post.media.url }}" width="100px" height="100px" controls></video>
+                            {% else %}
+                                <p class="error">Анон залил какой-то кал вместо пик или шебм</p>
+                            {% endif %}
+                        {% endif %}
+                       <p id="p{{ post.id }}">{{post.text}}</p>
+                    </div>
+            {% endfor %}
+            {% empty %}
+            There isn't hardly any matching pattern result(
+        {% endfor %}
+    {% elif message != None %}
+        <div class="text-info ">
+        test1
+            {{ message }}
+        </div>
+    {% elif alert != None %}
+        <div class="text-danger bg-dark">
+        test2
+                {{ alert }}
+        </div>
+    {% else %}
+    {% endif %}
+{% endblock %}

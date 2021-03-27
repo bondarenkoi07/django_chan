@@ -9,7 +9,7 @@ from learning import settings
 # TODO: add units list to imageboard header (DONE)
 # TODO: try to create some tests (+-DONE)
 urlpatterns = [
-    path('unittest/', views.unit_list, name='index'),
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     re_path(r'^(?P<_unit>[_\-\w\d]+)$', views.unit, name='unit'),
     re_path(r'^(?P<_unit>[_\-\w\d]+)/(?P<_thread>\d+)$', views.thread, name='thread'),

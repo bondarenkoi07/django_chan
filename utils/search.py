@@ -29,6 +29,7 @@ class Search:
                         instance = {"thread": _thread, "comments": []}
                     instance["comments"].append(comment)
             if instance is not None:
+                instance["unit"] = _thread.unit.name
                 self.push(instance)
 
     def push(self, instance):
